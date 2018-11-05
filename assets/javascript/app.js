@@ -51,10 +51,10 @@ function renderButtons() {
                 $imageDivRow.addClass("row");
 
                 var $imageDiv = $("<div>");
-                $imageDiv.addClass("col-lg-4 card ");
+                $imageDiv.addClass("col-lg-5 card ");
 
                 var $imagePropertiesDiv = $("<div>");
-                $imagePropertiesDiv.addClass("col-lg-8 card text-left");
+                $imagePropertiesDiv.addClass("col-lg-7 card text-left");
 
                 var $image = $("<img>");
                 //Retrieves the "still" (non animated image from the object
@@ -69,6 +69,14 @@ function renderButtons() {
                 $image.attr("data-animate", results[i].images.fixed_height.url);
                 // Sets ID.
                 $image.attr("id", "animal-img");
+                //Sets the data-still's and data-animate's width and height
+                $image.attr("data-still-width", results[i].images.fixed_height_still.width);
+                $image.attr("data-still-height", results[i].images.fixed_height_still.height);
+                $image.attr("data-animate-width", results[i].images.fixed_height.width);
+                $image.attr("data-animate-height", results[i].images.fixed_height.height);
+                //Sets the wdith and height of the image
+                $image.attr("width", results[i].images.fixed_height_still.width);
+                $image.attr("height", results[i].images.fixed_height_still.height);
                 //Appends to the the div that displays the image.
                 $imageDiv.append($image);
                 //Retrieves various properties from the object and appends them to the div that 
@@ -105,7 +113,9 @@ function renderButtons() {
                     //Set the image source to the url with the animate image that was set earlier
                     //in the data-animate attribute.
                     $(this).attr("src", $(this).attr("data-animate"));
-
+                    //Sets the width and height based on the data element 
+                    $(this).attr("width", $(this).attr("data-animate-width"));
+                    $(this).attr("height", $(this).attr("data-animate-height"));
                 }
                 //If the data state attribute of the image is not "still" 
                 //The only other option is "animate" so this is
@@ -117,7 +127,9 @@ function renderButtons() {
                     //Set the image source to the url with the still image that was set earlier
                     //in the data-still attribute.
                     $(this).attr("src", $(this).attr("data-still"));
-
+                    //Sets the width and height based on the data element
+                    $(this).attr("width", $(this).attr("data-still-width"));
+                    $(this).attr("height", $(this).attr("data-still-height"));
                 }
 
             });
